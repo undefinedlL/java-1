@@ -72,7 +72,7 @@ public class Field extends JPanel {
     	  if (x - 30 > -48) x -= 30;
     	  else x = 752;
       } else if (key_ == 39) {
-    	  if (x - 30 > 752) x -= 30;
+    	  if (x - 30 < 752) x += 30;
     	  else x = -48;
       }
       
@@ -94,7 +94,7 @@ public class Field extends JPanel {
 	  giftArray = new Gift[7];
 	  for (int i = 0; i < 7; i++) {
 		  try {
-			  giftArray[i] = new Gift(ImageIO.read(new File("c:\\g" + i + ".png")));
+			  giftArray[i] = new Gift(ImageIO.read(new File("d:\\g" + i + ".png")));
 		  } catch(IOException ex) {}
 	  }
 	  

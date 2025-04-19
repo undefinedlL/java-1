@@ -1,3 +1,6 @@
+## Ссылка на презентацию
+https://docs.google.com/presentation/d/16nSReapev07zfbR7me7SwqU_ioBwXONE8EBolkLa4HU/edit?usp=sharing
+
 ## SQL запрос
 ```
 INSERT INTO table1 (id, text)

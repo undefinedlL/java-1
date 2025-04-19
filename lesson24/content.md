@@ -60,3 +60,31 @@ try {
     }
 } catch (Exception e1) {}
 ```
+
+## Panel.java
+```
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Panel extends JPanel {
+  private int val = 0;
+    
+  public Panel() {
+    this.setLayout(null);
+    Timer t = new Timer(200, e -> {
+      val++;
+      if (val == 256) val = 0;
+      repaint();
+    });
+    t.start();
+  }
+  public void paintComponent(Graphics gr) {
+    super.paintComponent(gr);
+    for (int i=0; i<255; i++) {
+      gr.setColor(new Color(0, (i*val)%255, 0));
+      gr.drawRect(250-i/2, 220-i/2, i, i);
+    }
+  }
+}
+```

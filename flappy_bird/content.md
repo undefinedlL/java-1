@@ -4,6 +4,81 @@
 https://docs.google.com/presentation/d/1C4n_E1ALlnNpeLYyvEsf_aCUby2VZS3I6Z7QpnFp-64/edit?usp=sharing
 
 
+## Код занятия 25
+```
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Random;
+import javax.imageio.*;
+import javax.swing.*;
+
+public class FlappyBird extends JPanel implements ActionListener {
+ int boardWidth = 360, boardHeight = 640;
+ Image bgImg, birdImg, topPipeImg, bottomPipeImg;
+ 
+ // bird 
+ int birdX = boardWidth/8, birdY = boardHeight / 2;
+ int birdWidth = 34, birdHeight = 24;
+ 
+ class Bird {
+  int x = birdX, y = birdY;
+  int width = birdWidth, height = birdHeight;
+  Image img;
+  Bird(Image img) {
+   this.img = img;
+  }
+ }
+ 
+ // Логика игры
+ Bird bird;
+ int vY = -9; // скорость 
+ int gravity = 1;
+ 
+ Timer gameLoop;
+ 
+ FlappyBird() {
+  this.setPreferredSize(new Dimension(boardWidth, boardHeight));
+  this.setBackground(Color.green);
+  
+  try {
+   bgImg = ImageIO.read(this.getClass().getResource("./bg.png"));
+   birdImg = ImageIO.read(this.getClass().getResource("./bird.png"));
+   topPipeImg = ImageIO.read(this.getClass().getResource("./toppipe.png"));
+   bottomPipeImg = ImageIO.read(this.getClass().getResource("./bottompipe.png"));
+  } catch (Exception e) {}
+  
+  bird = new Bird(birdImg);
+  
+  gameLoop = new Timer(1000/60, this);
+  gameLoop.start();
+ }
+ 
+ public void paintComponent(Graphics gr) {
+  super.paintComponent(gr);
+  draw(gr);
+ }
+ 
+ public void move() {
+  vY += gravity;
+  bird.y += vY;
+  bird.y = Math.max(bird.y, 0);
+ }
+ 
+ public void draw(Graphics g) {
+  g.drawImage(bgImg, 0, 0, boardWidth, boardHeight, null);
+  g.drawImage(bird.img, bird.x, bird.y, bird.width, bird.height, null);
+ }
+
+ @Override
+ public void actionPerformed(ActionEvent e) {
+  move();
+  repaint();
+ }
+ 
+}
+```
+
 ## Полный код игры
 
 ### файл Main.java

@@ -3,6 +3,89 @@
 ### Ссылка на презентацию:
 https://docs.google.com/presentation/d/1Hdr-QgJyItNB7MpQi56NPkw7zipi8KhU1WBJq88-pAc/edit?usp=sharing
 
+
+## Код урока 28
+
+### Main.java
+```
+public class Main {
+
+ public static void main(String[] args) {
+  new TicTacToe();
+ }
+
+}
+```
+
+### TicTacToe.java
+```
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class TicTacToe {
+ int boardWidth = 600, boardHeight = 650;
+ JFrame frame = new JFrame();
+ JLabel textLabel = new JLabel();
+ JPanel textPanel = new JPanel();
+ JPanel boardPanel = new JPanel();
+ 
+ JButton[][] board = new JButton[3][3];
+ String playerX = "X";
+ String playerO = "O";
+ String currentPlayer = playerX;
+ 
+ boolean gameOver = false;
+ 
+ TicTacToe() {
+  frame.setVisible(true);
+  frame.setSize(boardWidth, boardHeight);
+  frame.setLocationRelativeTo(null);
+  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  frame.setLayout(new BorderLayout());
+  
+  textLabel.setText("Крестики-Нолики");
+  textLabel.setBackground(Color.darkGray);
+  textLabel.setForeground(Color.white);
+  textLabel.setOpaque(true);
+  textLabel.setHorizontalAlignment(JLabel.CENTER);
+  textLabel.setFont(new Font("Arial", Font.BOLD, 50));
+  
+  textPanel.setLayout(new BorderLayout());
+  textPanel.add(textLabel);
+  frame.add(textPanel, BorderLayout.NORTH);
+  
+  boardPanel.setLayout(new GridLayout(3, 3));
+  boardPanel.setBackground(Color.darkGray);
+  frame.add(boardPanel);
+  
+  for (int r = 0; r < 3; r++) {
+   for (int c = 0; c < 3; c++) {
+    JButton tile = new JButton();
+    board[r][c] = tile;
+    boardPanel.add(tile);
+    
+    tile.setBackground(Color.darkGray);
+          tile.setForeground(Color.white);
+          tile.setFont(new Font("Arial", Font.PLAIN, 120));
+          tile.setFocusable(false);
+//          tile.setText(currentPlayer);
+          
+          tile.addActionListener(e -> {
+           if (gameOver) return;
+           JButton currentTile = (JButton)e.getSource();
+           if (tile.getText() == "") {
+            currentTile.setText(currentPlayer);
+            currentPlayer = currentPlayer == playerX ? playerO : playerX; 
+            textLabel.setText("Ход " + currentPlayer);            
+           }
+          });
+   }
+  }
+ }
+}
+```
+
 ## Полный код игры
 
 ### файл Main.java
